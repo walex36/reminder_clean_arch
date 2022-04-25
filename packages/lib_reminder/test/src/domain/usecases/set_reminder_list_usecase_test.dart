@@ -10,7 +10,7 @@ void main() {
   late SetReminderListUsecase usecase;
   late MockReminderRepository mockRepository;
 
-  setUp((){
+  setUp(() {
     mockRepository = MockReminderRepository();
     usecase = SetReminderListUsecase(reminderRepository: mockRepository);
   });
@@ -24,14 +24,28 @@ void main() {
   const listReminder = [reminder];
 
   test('should update list reminders local', () async {
+    when(() => mockRepository.setReminderList(reminders: listReminder))
+        .thenAnswer((_) async => const Right(true));
 
-    when(() => mockRepository.setReminderList(reminders: listReminder)).thenAnswer((_) async => const Right(true));
-
-    final result = await usecase(ParamsSetReminderListUsecase(reminders: listReminder));
+    final result =
+        await usecase(ParamsSetReminderListUsecase(reminders: listReminder));
 
     expect(result, const Right(true));
-    verify(() => mockRepository.setReminderList(reminders: listReminder)).called(1);
+    verify(() => mockRepository.setReminderList(reminders: listReminder))
+        .called(1);
     verifyNoMoreInteractions(mockRepository);
   });
 
+  test('should return error from update list reminders local', () async {
+    when(() => mockRepository.setReminderList(reminders: listReminder))
+        .thenAnswer((_) async => const Left(SetReminderFailure()));
+
+    final result =
+        await usecase(ParamsSetReminderListUsecase(reminders: listReminder));
+
+    expect(result, const Left(SetReminderFailure()));
+    verify(() => mockRepository.setReminderList(reminders: listReminder))
+        .called(1);
+    verifyNoMoreInteractions(mockRepository);
+  });
 }

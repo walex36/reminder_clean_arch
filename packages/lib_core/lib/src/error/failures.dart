@@ -20,3 +20,9 @@ class AllReminderFailure extends IFailure {
     String message = 'Problema ao buscar Lista de Lembretes',
   }) : super(message: message);
 }
+
+class SetReminderFailure extends IFailure {
+  const SetReminderFailure({
+    String message = 'Problema ao salvar Lista de Lembretes',
+  }) : super(message: message);
+}

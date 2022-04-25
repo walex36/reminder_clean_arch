@@ -39,7 +39,7 @@ class ReminderRepository implements IReminderRepository {
 
       return const Right(true);
     } catch (e) {
-      throw Exception();
+      return const Left(SetReminderFailure());
     }
   }
 }
