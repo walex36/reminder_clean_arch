@@ -1,0 +1,40 @@
+name: reminder_clean_arch
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  lib_dependencies:
+    path: packages/lib_dependencies
+  lib_reminder:
+    path: packages/lib_reminder
+  lib_core:
+    path: packages/lib_core
+
+  reminder:
+    path: modules/reminder
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
