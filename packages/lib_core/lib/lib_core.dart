@@ -1,6 +1,7 @@
 library lib_core;
 /// [ERRORS]
 export 'src/error/failures.dart';
+export 'src/error/exceptions.dart';
 
 /// [USERCASES]
 export 'src/usecases/usecase.dart';

@@ -11,6 +11,6 @@ export 'src/data/datasources/reminder_sembast_datasource.dart';
 export 'src/database/i_reminder_database.dart';
 export 'src/database/reminder_database.dart';
 
-export 'src/domain/usercases/get_reminder_usercase.dart';
-export 'src/domain/usercases/get_all_reminder_usecase.dart';
-export 'src/domain/usercases/set_reminder_list_usercase.dart';
+export 'src/domain/usecases/get_reminder_usecase.dart';
+export 'src/domain/usecases/get_all_reminder_usecase.dart';
+export 'src/domain/usecases/set_reminder_list_usecase.dart';

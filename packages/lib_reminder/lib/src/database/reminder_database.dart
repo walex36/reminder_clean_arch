@@ -40,12 +40,12 @@ class ReminderDatabase extends IReminderDatabase {
         return [];
       }
     } catch (e) {
-      throw Exception();
+      throw CacheException(message: 'Não foi possivel buscar os lembretes');
     }
   }
 
   @override
-  Future<void> storeListaReminders(
+  Future<void> setListaReminders(
       {required List<ReminderModel> reminderList}) async {
     try {
       final _database = await database;
@@ -60,7 +60,7 @@ class ReminderDatabase extends IReminderDatabase {
 
       await _store.record(0).put(_database, remindersMap);
     } catch (e) {
-      throw Exception();
+      throw CacheException(message: 'Não foi possivel salvar os lembretes');
     }
   }
 
