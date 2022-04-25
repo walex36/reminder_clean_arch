@@ -10,10 +10,10 @@ class ReminderModule extends Module {
           getAllReminderUsercase: i(),
           setReminderListUsecase: i(),
         )),
-    Bind((i) => GetAllReminderUsercase(iReminderRepository: i())),
+    Bind((i) => GetAllReminderUsecase(reminderRepository: i())),
     Bind((i) => SetReminderListUsecase(reminderRepository: i())),
     Bind<IReminderRepository>(
-        (i) => ReminderRepository(iReminderLocalDatasource: i())),
+        (i) => ReminderRepository(reminderLocalDatasource: i())),
     Bind<IReminderLocalDatasource>(
         (i) => ReminderSembastDatasource(localDataBase: i())),
     Bind<IReminderDatabase>((i) => ReminderDatabase.intance)

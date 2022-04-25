@@ -6,18 +6,23 @@ import 'package:lib_reminder/src/data/models/reminder_model.dart';
 
 
 class ReminderRepository implements IReminderRepository {
-  final IReminderLocalDatasource _iReminderLocalDatasource;
+  final IReminderLocalDatasource _reminderLocalDatasource;
 
   ReminderRepository(
-      {required IReminderLocalDatasource iReminderLocalDatasource})
-      : _iReminderLocalDatasource = iReminderLocalDatasource;
+      {required IReminderLocalDatasource reminderLocalDatasource})
+      : _reminderLocalDatasource = reminderLocalDatasource;
 
   @override
   Future<Either<IFailure, List<Reminder>>> getAllReminder() async {
+    try {
     final List<Reminder> reminders =
-        await _iReminderLocalDatasource.getReminderList();
+        await _reminderLocalDatasource.getReminderList();
 
     return Right(reminders);
+      
+    } catch (e) {
+      return const Left(AllReminderFailure());
+    }
   }
 
   @override
@@ -30,7 +35,7 @@ class ReminderRepository implements IReminderRepository {
   @override
   Future<Either<IFailure, bool>> setReminderList({required List<Reminder> reminders}) async {
     try {
-      await _iReminderLocalDatasource.setReminderList(reminders: List<ReminderModel>.from(reminders.map(ReminderModel.fromEntity)));
+      await _reminderLocalDatasource.setReminderList(reminders: List<ReminderModel>.from(reminders.map(ReminderModel.fromEntity)));
 
       return const Right(true);
     } catch (e) {

@@ -8,11 +8,11 @@ part 'reminder_event.dart';
 part 'reminder_state.dart';
 
 class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
-  final GetAllReminderUsercase _getAllReminderUsercase;
+  final GetAllReminderUsecase _getAllReminderUsercase;
   final SetReminderListUsecase _setReminderListUsecase;
 
   ReminderBloc({
-    required GetAllReminderUsercase getAllReminderUsercase,
+    required GetAllReminderUsecase getAllReminderUsercase,
     required SetReminderListUsecase setReminderListUsecase,
   })  : _getAllReminderUsercase = getAllReminderUsercase,
         _setReminderListUsecase = setReminderListUsecase,

@@ -2,7 +2,7 @@ import 'package:lib_core/lib_core.dart';
 import '../data/models/reminder_model.dart';
 
 abstract class IReminderDatabase extends IIntNoSQLDatabase {
-  Future<void> storeListaReminders({
+  Future<void> setListaReminders({
     required List<ReminderModel> reminderList,
   });
 

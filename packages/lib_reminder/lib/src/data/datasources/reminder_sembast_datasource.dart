@@ -5,16 +5,12 @@ import 'package:lib_reminder/src/database/i_reminder_database.dart';
 class ReminderSembastDatasource implements IReminderLocalDatasource {
   final IReminderDatabase _localDatasource;
 
-  ReminderSembastDatasource({required IReminderDatabase localDataBase}) : _localDatasource = localDataBase;
-
+  ReminderSembastDatasource({required IReminderDatabase localDataBase})
+      : _localDatasource = localDataBase;
 
   @override
   Future<List<ReminderModel>> getReminderList() async {
-    try {
-      return await _localDatasource.getListaReminders();
-    } catch (e) {
-      throw Exception();
-    }
+    return await _localDatasource.getListaReminders();
   }
 
   @override
@@ -24,13 +20,7 @@ class ReminderSembastDatasource implements IReminderLocalDatasource {
 
   @override
   Future<bool> setReminderList({required List<ReminderModel> reminders}) async {
-    try {
-      await _localDatasource.storeListaReminders(reminderList: reminders);
-
-      return true;
-    } catch (e) {
-      throw Exception();
-    }
+    await _localDatasource.setListaReminders(reminderList: reminders);
+    return true;
   }
-  
 }
