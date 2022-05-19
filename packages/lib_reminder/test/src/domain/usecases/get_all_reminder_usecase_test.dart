@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lib_core/lib_core.dart';
 import 'package:lib_dependencies/lib_dependencies.dart';
@@ -15,21 +16,23 @@ void main() {
     usercase = GetAllReminderUsecase(reminderRepository: mockRepository);
   });
 
-  const reminder = Reminder(
+  Reminder reminder = Reminder(
     codigoReminder: 1,
+    codigoCategory: 1,
     titleReminder: 'title',
     bodyReminder: 'body',
+    backgroudReminder: Colors.grey.shade300,
   );
 
-  const listReminder = [reminder];
+  List<Reminder> listReminder = [reminder];
 
   test('should return all reminders', () async {
     when(() => mockRepository.getAllReminder())
-        .thenAnswer((_) async => const Right(listReminder));
+        .thenAnswer((_) async => Right(listReminder));
 
     final result = await usercase(ParamsGetAllReminderUseCase());
 
-    expect(result, equals(const Right(listReminder)));
+    expect(result, equals(Right(listReminder)));
     verify(() => mockRepository.getAllReminder()).called(1);
     verifyNoMoreInteractions(mockRepository);
   });

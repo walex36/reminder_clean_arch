@@ -17,6 +17,8 @@ dependencies:
     path: ../../packages/lib_core
   lib_reminder:
     path: ../../packages/lib_reminder
+  lib_design_system:
+    path: ../../packages/lib_design_system
 
 dev_dependencies:
   flutter_test:

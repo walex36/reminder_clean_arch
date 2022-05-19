@@ -18,6 +18,8 @@ dependencies:
     path: packages/lib_reminder
   lib_core:
     path: packages/lib_core
+  lib_design_system:
+    path: packages/lib_design_system
 
   reminder:
     path: modules/reminder

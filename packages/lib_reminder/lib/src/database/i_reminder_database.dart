@@ -8,5 +8,7 @@ abstract class IReminderDatabase extends IIntNoSQLDatabase {
 
   Future<List<ReminderModel>> getListaReminders();
 
-  Future<void> storeReminder();
+  Future<bool> storeReminder({
+    required ReminderModel reminder,
+  });
 }

@@ -14,8 +14,9 @@ class ReminderSembastDatasource implements IReminderLocalDatasource {
   }
 
   @override
-  Future<bool> setReminder({required ReminderModel reminder}) {
-    throw UnimplementedError();
+  Future<bool> setReminder({required ReminderModel reminder}) async {
+    final failureOrSuccess = await _localDatasource.storeReminder(reminder: reminder);
+    return failureOrSuccess;
   }
 
   @override

@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:lib_core/lib_core.dart';
 import 'package:lib_reminder/lib_reminder.dart';
-import 'package:lib_reminder/src/data/models/reminder_model.dart';
 
 class SetReminderListUsecase
     implements UseCase<bool, ParamsSetReminderListUsecase> {

@@ -151,6 +151,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  lib_design_system:
+    dependency: "direct main"
+    description:
+      path: "packages/lib_design_system"
+      relative: true
+    source: path
+    version: "0.0.1"
   lib_reminder:
     dependency: "direct main"
     description:

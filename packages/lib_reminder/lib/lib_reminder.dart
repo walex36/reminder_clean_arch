@@ -14,3 +14,4 @@ export 'src/database/reminder_database.dart';
 export 'src/domain/usecases/get_reminder_usecase.dart';
 export 'src/domain/usecases/get_all_reminder_usecase.dart';
 export 'src/domain/usecases/set_reminder_list_usecase.dart';
+export 'src/domain/usecases/set_reminder_usecase.dart';

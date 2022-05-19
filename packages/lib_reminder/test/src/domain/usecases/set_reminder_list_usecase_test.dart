@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lib_core/lib_core.dart';
 import 'package:lib_dependencies/lib_dependencies.dart';
@@ -15,13 +16,15 @@ void main() {
     usecase = SetReminderListUsecase(reminderRepository: mockRepository);
   });
 
-  const reminder = Reminder(
+  Reminder reminder = Reminder(
     codigoReminder: 1,
+    codigoCategory: 1,
     titleReminder: 'title',
     bodyReminder: 'body',
+    backgroudReminder: Colors.grey.shade300,
   );
 
-  const listReminder = [reminder];
+  List<Reminder> listReminder = [reminder];
 
   test('should update list reminders local', () async {
     when(() => mockRepository.setReminderList(reminders: listReminder))

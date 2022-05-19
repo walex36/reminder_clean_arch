@@ -12,43 +12,66 @@ class InitReminder extends ReminderEvent {
 // Evento para criar um novo Reminder
 class CreateReminder extends ReminderEvent {
   final int codigoReminder;
+  final int codigoCategory;
   final String titleReminder;
   final String bodyReminder;
+  final Color backgroudReminder;
 
   CreateReminder({
     required this.codigoReminder,
+    required this.codigoCategory,
     required this.titleReminder,
     required this.bodyReminder,
+    required this.backgroudReminder,
   });
 
   @override
   List<Object?> get props => [
         codigoReminder,
+        codigoCategory,
         titleReminder,
         bodyReminder,
+        backgroudReminder,
       ];
 }
 
-class RemoveReminder extends ReminderEvent {
-  final List<Reminder> remindersRemove;
+class UpdateReminder extends ReminderEvent {
+  final Reminder reminder;
 
-  RemoveReminder({required this.remindersRemove});
+  UpdateReminder({
+    required this.reminder,
+  });
 
   @override
   List<Object?> get props => [
-        remindersRemove,
+        reminder,
       ];
+}
+
+class SelectReminder extends ReminderEvent {
+  final Reminder reminderSelect;
+
+  SelectReminder({
+    required this.reminderSelect,
+  });
+
+  @override
+  List<Object?> get props => [
+        reminderSelect,
+      ];
+}
+
+//Evento para remover Reminder
+class RemoveReminder extends ReminderEvent {
+  @override
+  List<Object?> get props => [];
 }
 
 class EditReminder extends ReminderEvent {
-  
   final Reminder reminderEdit;
 
   EditReminder({required this.reminderEdit});
-  
+
   @override
-  List<Object?> get props => [
-    reminderEdit
-  ];
-  
+  List<Object?> get props => [reminderEdit];
 }
