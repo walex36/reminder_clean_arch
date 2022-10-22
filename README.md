@@ -3,6 +3,8 @@
 Este projeto teve como objetivo estudar o clean dart e clean code,
 para manter o projeto organizado e o codigo limpo.
 
+**Projeto em andamento**
+
 ## Funcionalidades
 
 - Crud de um lembrete - criar, editar e deletar
