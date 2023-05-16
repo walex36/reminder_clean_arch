@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:lib_dependencies/lib_dependencies.dart';
 import 'package:lib_reminder/lib_reminder.dart';
-import 'package:reminder/src/presentation/controller/reminder_details/reminder_details_bloc.dart';
 import '../controller/reminder_page.dart/reminder_bloc.dart';
 
 class CardReminderWidget extends StatelessWidget {
-  final Reminder _reminder;
+  final Reminder reminder;
 
   final ReminderBloc reminderBloc = Modular.get();
-  final ReminderDetailsBloc reminderDetailsBloc = Modular.get();
 
-  CardReminderWidget({Key? key, required Reminder reminder})
-      : _reminder = reminder,
-        super(key: key);
+  CardReminderWidget({
+    Key? key,
+    required this.reminder,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: reminderBloc.state.remindersSelect.contains(_reminder)
+      color: reminderBloc.state.remindersSelect.contains(reminder)
           ? Colors.black38
-          : _reminder.backgroudReminder,
+          : reminder.backgroudReminder,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       child: InkWell(
@@ -27,14 +26,18 @@ class CardReminderWidget extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () => reminderBloc.state.remindersSelect.isNotEmpty
-            ? reminderBloc.add(SelectReminder(reminderSelect: _reminder))
+            ? reminderBloc.add(SelectReminder(reminderSelect: reminder))
             : {
-                reminderDetailsBloc
-                    .add(InitReminderDetails(reminder: _reminder)),
-                Modular.to.pushNamed('reminderdetails'),
+                Modular.to.pushNamed(
+                  'reminderdetails',
+                  arguments: {
+                    'reminder': reminder,
+                  },
+                ),
               },
-        onLongPress: () =>
-            reminderBloc.add(SelectReminder(reminderSelect: _reminder)),
+        onLongPress: () => reminderBloc.add(
+          SelectReminder(reminderSelect: reminder),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
@@ -42,8 +45,8 @@ class CardReminderWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                    _reminder.titleReminder,
-                    maxLines: 2,
+                reminder.titleReminder,
+                maxLines: 2,
                 overflow: TextOverflow.fade,
                 textAlign: TextAlign.justify,
                 style: TextStyle(
@@ -55,7 +58,7 @@ class CardReminderWidget extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                _reminder.bodyReminder,
+                reminder.bodyReminder,
                 maxLines: 5,
                 overflow: TextOverflow.fade,
                 textAlign: TextAlign.justify,

@@ -3,33 +3,29 @@ import 'package:flutter/material.dart';
 class ListColorsReminders extends StatefulWidget {
   final Color? colorSelect;
   final Function colorOnTap;
-  const ListColorsReminders({ Key? key, required this.colorSelect, required this.colorOnTap}) : super(key: key);
+  const ListColorsReminders(
+      {Key? key, required this.colorSelect, required this.colorOnTap})
+      : super(key: key);
 
   @override
   State<ListColorsReminders> createState() => _ListColorsRemindersState();
 }
 
 class _ListColorsRemindersState extends State<ListColorsReminders> {
-
   late Color colorSelect;
 
-  List<Color> colors = [
-    Colors.grey.shade300,
-    Colors.greenAccent,
-    Colors.redAccent,
-    Colors.blueAccent,
-    Colors.orangeAccent,
-    Colors.pinkAccent,
-  ];
+  List<Color> colors = [];
 
   @override
   void initState() {
     super.initState();
-    colorSelect = widget.colorSelect ?? Colors.white;
+    colors.add(Colors.grey.shade300);
+    colors.addAll(Colors.accents.map((e) => e).toList());
   }
 
   @override
   Widget build(BuildContext context) {
+    colorSelect = widget.colorSelect ?? colors.first;
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: colors.length,

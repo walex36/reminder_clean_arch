@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lib_core/lib_core.dart';
 import 'package:lib_dependencies/lib_dependencies.dart';
 import 'package:lib_design_system/lib_design_system.dart';
+import 'package:reminder/src/presentation/widgets/reminder_page/reminder_page_success.dart';
 import '../widgets/reminder_page/reminder_page_empty.dart';
 import '../widgets/reminder_page/reminder_page_failure.dart';
 import '../widgets/reminder_page/reminder_page_loading.dart';
@@ -27,30 +28,28 @@ class _ReminderPageState extends State<ReminderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: const AppbarWidget(
-        title: 'GridReminder',
+      appBar: const AppbarWidget(
+        title: 'Meus Lembretes',
       ),
       body: BlocBuilder<ReminderBloc, ReminderState>(
-      bloc: reminderBloc,
-      builder: (context, state) {
-        switch (state.status) {
-          case ControlStatus.empty:
-            return const ReminderPageEmpty();
-          case ControlStatus.initial:
-            return const Text("initial");
-          case ControlStatus.loading:
-            return const ReminderPageLoading();
-          case ControlStatus.failure:
-            return const ReminderPageFailure();
-          case ControlStatus.success:
-            return ReminderGridWidget(
-              reminders: state.reminders,
-            );
-          default:
-            return const Text("default");
-        }
-      },
-    ),
-    ); 
+        bloc: reminderBloc,
+        builder: (context, state) {
+          switch (state.status) {
+            case ControlStatus.empty:
+              return const ReminderPageEmpty();
+            case ControlStatus.initial:
+              return const Text("initial");
+            case ControlStatus.loading:
+              return const ReminderPageLoading();
+            case ControlStatus.failure:
+              return const ReminderPageFailure();
+            case ControlStatus.success:
+              return const ReminderPageSuccess();
+            default:
+              return const Text("default");
+          }
+        },
+      ),
+    );
   }
 }

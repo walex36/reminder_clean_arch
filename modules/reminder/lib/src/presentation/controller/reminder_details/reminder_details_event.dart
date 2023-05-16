@@ -4,7 +4,7 @@ part of 'reminder_details_bloc.dart';
 abstract class ReminderDetailsEvent extends Equatable {}
 
 class InitReminderDetails extends ReminderDetailsEvent {
-  final Reminder reminder;
+  final Reminder? reminder;
 
   InitReminderDetails({
     required this.reminder,

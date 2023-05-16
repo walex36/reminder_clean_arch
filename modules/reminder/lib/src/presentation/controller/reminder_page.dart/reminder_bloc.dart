@@ -42,22 +42,26 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
         await _getAllReminderUsercase(ParamsGetAllReminderUseCase());
 
     failureOrSuccess.fold(
-        (failure) => emit(state.copyWith(
-              reminders: [],
-              status: ControlStatus.failure,
-            )), (success) {
-      if (success.isEmpty) {
-        emit(state.copyWith(
-          reminders: success,
-          status: ControlStatus.empty,
-        ));
-      } else {
-        emit(state.copyWith(
-          reminders: success,
-          status: ControlStatus.success,
-        ));
-      }
-    });
+      (failure) => emit(
+        state.copyWith(
+          reminders: [],
+          status: ControlStatus.failure,
+        ),
+      ),
+      (success) {
+        if (success.isEmpty) {
+          emit(state.copyWith(
+            reminders: success,
+            status: ControlStatus.empty,
+          ));
+        } else {
+          emit(state.copyWith(
+            reminders: success,
+            status: ControlStatus.success,
+          ));
+        }
+      },
+    );
   }
 
   Future<void> _onCreateReminder(
@@ -85,6 +89,12 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
 
     emit(state.copyWith(
         reminders: listReminders, status: ControlStatus.success));
+
+    if (event.openReminder) {
+      Modular.to.pushNamed('reminderdetails', arguments: {
+        'reminder': newReminder,
+      });
+    }
   }
 
   Future<void> _onUpdateReminder(

@@ -16,6 +16,7 @@ class CreateReminder extends ReminderEvent {
   final String titleReminder;
   final String bodyReminder;
   final Color backgroudReminder;
+  final bool openReminder;
 
   CreateReminder({
     required this.codigoReminder,
@@ -23,6 +24,7 @@ class CreateReminder extends ReminderEvent {
     required this.titleReminder,
     required this.bodyReminder,
     required this.backgroudReminder,
+    this.openReminder = false,
   });
 
   @override

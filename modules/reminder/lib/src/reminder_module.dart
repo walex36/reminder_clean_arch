@@ -2,7 +2,6 @@ import 'package:lib_dependencies/lib_dependencies.dart';
 import 'package:lib_reminder/lib_reminder.dart';
 import 'package:reminder/src/presentation/controller/reminder_details/reminder_details_bloc.dart';
 import 'presentation/controller/reminder_page.dart/reminder_bloc.dart';
-import 'presentation/pages/reminder_create_page.dart';
 import 'presentation/pages/reminder_details_page.dart';
 import 'presentation/pages/reminder_page.dart';
 
@@ -14,22 +13,14 @@ class ReminderModule extends Module {
           setReminderListUsecase: i(),
           setReminderUsecase: i(),
         )),
-    Bind((i) => ReminderDetailsBloc()),
-
-
+    Bind((i) => ReminderDetailsBloc(setReminderUsecase: i())),
     Bind((i) => GetAllReminderUsecase(reminderRepository: i())),
     Bind((i) => SetReminderListUsecase(reminderRepository: i())),
     Bind((i) => SetReminderUsecase(reminderRepository: i())),
-
-
     Bind<IReminderRepository>(
         (i) => ReminderRepository(reminderLocalDatasource: i())),
-
-
     Bind<IReminderLocalDatasource>(
         (i) => ReminderSembastDatasource(localDataBase: i())),
-
-
     Bind<IReminderDatabase>((i) => ReminderDatabase.intance)
   ];
 
@@ -40,12 +31,10 @@ class ReminderModule extends Module {
       child: (context, args) => const ReminderPage(),
     ),
     ChildRoute(
-      '/remindercreate',
-      child: (context, args) => const ReminderCreatePage(),
-    ),
-    ChildRoute(
       '/reminderdetails',
-      child: (context, args) =>const ReminderDetailsPage(),
+      maintainState: false,
+      child: (context, args) =>
+          ReminderDetailsPage(reminder: args.data['reminder']),
     ),
   ];
 }
