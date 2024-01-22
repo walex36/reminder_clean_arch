@@ -1,10 +1,11 @@
-import 'package:lib_dependencies/lib_dependencies.dart';
-import 'package:lib_core/lib_core.dart';
-import 'package:reminder/reminder.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:reminder_clean_arch/core/core.dart';
+
+import 'reminder/reminder_module.dart';
 
 class AppModule extends Module {
   static String get initialRoute => RoutesConst.home;
-  
+
   @override
   final List<Bind<Object>> binds = [];
 
