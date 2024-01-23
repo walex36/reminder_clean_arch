@@ -4,21 +4,22 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:reminder_clean_arch/core/core.dart';
 import 'package:reminder_clean_arch/reminder/src/domain/domain.dart';
+import 'package:reminder_clean_arch/reminder/src/domain/usecases/delete_reminder_usecase.dart';
 part 'reminder_event.dart';
 part 'reminder_state.dart';
 
 class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
-  final GetAllReminderUsecase _getAllReminderUsercase;
-  final SetReminderListUsecase _setReminderListUsecase;
+  final GetRemindersUsecase _getRemindersUsecase;
   final SetReminderUsecase _setReminderUsecase;
+  final DeleteReminderUsecase _deleteReminderUsecase;
 
   ReminderBloc({
-    required GetAllReminderUsecase getAllReminderUsercase,
-    required SetReminderListUsecase setReminderListUsecase,
+    required GetRemindersUsecase getRemindersUsecase,
     required SetReminderUsecase setReminderUsecase,
-  })  : _getAllReminderUsercase = getAllReminderUsercase,
-        _setReminderListUsecase = setReminderListUsecase,
+    required DeleteReminderUsecase deleteReminderUsecase,
+  })  : _getRemindersUsecase = getRemindersUsecase,
         _setReminderUsecase = setReminderUsecase,
+        _deleteReminderUsecase = deleteReminderUsecase,
         super(
           const ReminderState(
             reminders: [],
@@ -40,7 +41,7 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
     emit(state.copyWith(status: ControlStatus.loading));
 
     final failureOrSuccess =
-        await _getAllReminderUsercase(ParamsGetAllReminderUseCase());
+        await _getRemindersUsecase(ParamsGetRemindersUseCase());
 
     failureOrSuccess.fold(
       (failure) => emit(
@@ -81,15 +82,6 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
         titleReminder: event.titleReminder,
         bodyReminder: event.bodyReminder,
         backgroudReminder: event.backgroudReminder);
-
-    _setReminderUsecase(ParamsSetReminderUsecase(reminder: newReminder));
-
-    List<Reminder> listReminders = [];
-    listReminders.addAll(state.reminders);
-    listReminders.add(newReminder);
-
-    emit(state.copyWith(
-        reminders: listReminders, status: ControlStatus.success));
 
     if (event.openReminder) {
       Modular.to.pushNamed('reminderdetails', arguments: {
@@ -132,9 +124,10 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
 
     for (var r in state.remindersSelect) {
       reminders.remove(r);
+      await _deleteReminderUsecase(ParamsDeleteReminder(
+        codigoReminder: r.codigoReminder,
+      ));
     }
-
-    _setReminderListUsecase(ParamsSetReminderListUsecase(reminders: reminders));
 
     emit(state.copyWith(reminders: reminders, remindersSelect: []));
   }

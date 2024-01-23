@@ -11,35 +11,14 @@ class ReminderRepository implements IReminderRepository {
       : _reminderLocalDatasource = reminderLocalDatasource;
 
   @override
-  Future<Either<IFailure, List<Reminder>>> getAllReminder() async {
+  Future<Either<IFailure, List<Reminder>>> getReminders() async {
     try {
       final List<Reminder> reminders =
-          await _reminderLocalDatasource.getReminderList();
+          await _reminderLocalDatasource.getReminders();
 
       return Right(reminders);
-    } catch (e) {
-      return const Left(AllReminderFailure());
-    }
-  }
-
-  @override
-  Future<Either<IFailure, Reminder>> getReminder(
-      {required int codigoReminder}) {
-    // TODO: implement getReminder
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<IFailure, bool>> setReminderList(
-      {required List<Reminder> reminders}) async {
-    try {
-      await _reminderLocalDatasource.setReminderList(
-          reminders: List<ReminderModel>.from(
-              reminders.map(ReminderModel.fromEntity)));
-
-      return const Right(true);
-    } catch (e) {
-      return const Left(SetReminderFailure());
+    } on CacheException catch (e) {
+      return Left(GetRemindersFailure(message: e.message));
     }
   }
 
@@ -48,14 +27,35 @@ class ReminderRepository implements IReminderRepository {
       {required Reminder reminder}) async {
     try {
       final failureOrSuccess = await _reminderLocalDatasource.setReminder(
-          reminder: ReminderModel.fromEntity(reminder));
+        reminder: ReminderModel.fromEntity(reminder),
+      );
+
       if (failureOrSuccess) {
         return const Right(true);
       } else {
         return const Left(SetReminderFailure());
       }
-    } catch (e) {
-      return const Left(SetReminderFailure());
+    } on CacheException catch (e) {
+      return Left(SetReminderFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<IFailure, bool>> deleteReminder({
+    required int codigoReminder,
+  }) async {
+    try {
+      final failureOrSuccess = await _reminderLocalDatasource.deleteReminder(
+        codigoReminder: codigoReminder,
+      );
+
+      if (failureOrSuccess) {
+        return const Right(true);
+      } else {
+        return const Left(DeleteReminderFailure());
+      }
+    } on CacheException catch (e) {
+      return Left(DeleteReminderFailure(message: e.message));
     }
   }
 }

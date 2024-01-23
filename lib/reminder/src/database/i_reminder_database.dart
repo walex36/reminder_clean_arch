@@ -1,10 +1,9 @@
 import 'package:reminder_clean_arch/core/core.dart';
-
-import '../data/models/reminder_model.dart';
+import 'package:reminder_clean_arch/reminder/src/data/data.dart';
 
 abstract class IReminderDatabase extends IIntNoSQLDatabase {
-  Future<void> setListaReminders({
-    required List<ReminderModel> reminderList,
+  Future<bool> deleteReminder({
+    required int codigoReminder,
   });
 
   Future<List<ReminderModel>> getListaReminders();

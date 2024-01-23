@@ -1,13 +1,13 @@
-import '../models/reminder_model.dart';
+import 'package:reminder_clean_arch/reminder/src/data/data.dart';
 
 abstract class IReminderLocalDatasource {
-  Future<List<ReminderModel>> getReminderList();
-
-  Future<bool> setReminderList({
-    required List<ReminderModel> reminders,
-  });
+  Future<List<ReminderModel>> getReminders();
 
   Future<bool> setReminder({
     required ReminderModel reminder,
+  });
+
+  Future<bool> deleteReminder({
+    required int codigoReminder,
   });
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:reminder_clean_arch/core/core.dart';
 import 'package:reminder_clean_arch/design_system/design_system.dart';
 import 'package:reminder_clean_arch/reminder/src/presentation/presentation.dart';
+import 'package:reminder_clean_arch/reminder/src/presentation/widgets/dialog_category_widget.dart';
 
 class ReminderDetailsSuccess extends StatefulWidget {
   final String title;
@@ -46,7 +48,21 @@ class _ReminderDetailsSuccessState extends State<ReminderDetailsSuccess> {
         builder: (context, state) {
           return Scaffold(
             backgroundColor: state.reminder.backgroudReminder,
-            appBar: const AppbarWidget(),
+            appBar: AppbarWidget(
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.tag),
+                  onPressed: () async {
+                    await showDialog(
+                      context: context,
+                      builder: (context) => DialogCategoryWidget(
+                        color: state.reminder.backgroudReminder,
+                      ),
+                    );
+                  },
+                )
+              ],
+            ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: SafeArea(

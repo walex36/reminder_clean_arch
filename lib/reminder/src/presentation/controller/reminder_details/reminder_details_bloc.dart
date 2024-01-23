@@ -65,7 +65,9 @@ class ReminderDetailsBloc
     Reminder reminder =
         state.reminder.copyWith(backgroudReminder: event.colorReminder);
 
-    _saveReminder(reminder: reminder);
+    if (reminder.bodyReminder.isNotEmpty || reminder.titleReminder.isNotEmpty) {
+      _saveReminder(reminder: reminder);
+    }
     emit(state.copyWith(reminder: reminder));
   }
 

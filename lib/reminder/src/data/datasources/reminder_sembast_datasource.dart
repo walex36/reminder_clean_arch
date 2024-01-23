@@ -8,7 +8,7 @@ class ReminderSembastDatasource implements IReminderLocalDatasource {
       : _localDatasource = localDataBase;
 
   @override
-  Future<List<ReminderModel>> getReminderList() async {
+  Future<List<ReminderModel>> getReminders() async {
     return await _localDatasource.getListaReminders();
   }
 
@@ -20,8 +20,9 @@ class ReminderSembastDatasource implements IReminderLocalDatasource {
   }
 
   @override
-  Future<bool> setReminderList({required List<ReminderModel> reminders}) async {
-    await _localDatasource.setListaReminders(reminderList: reminders);
-    return true;
+  Future<bool> deleteReminder({required int codigoReminder}) async {
+    final failureOrSuccess =
+        await _localDatasource.deleteReminder(codigoReminder: codigoReminder);
+    return failureOrSuccess;
   }
 }

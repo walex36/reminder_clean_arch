@@ -45,7 +45,7 @@ class CardReminderWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                reminder.titleReminder,
+                reminder.codigoReminder.toString() + reminder.titleReminder,
                 maxLines: 2,
                 overflow: TextOverflow.fade,
                 textAlign: TextAlign.justify,
