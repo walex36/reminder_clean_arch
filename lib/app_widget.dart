@@ -11,9 +11,13 @@ class AppWidget extends StatelessWidget {
       Modular.setInitialRoute(AppModule.initialRoute);
 
       return MaterialApp.router(
-          title: 'Reminder Clean Arch',
-          routeInformationParser: Modular.routeInformationParser,
-          routerDelegate: Modular.routerDelegate);
+        title: 'Reminder Clean Arch',
+        routeInformationParser: Modular.routeInformationParser,
+        routerDelegate: Modular.routerDelegate,
+        theme: ThemeData(
+          primarySwatch: Colors.amber,
+        ),
+      );
     });
   }
 }

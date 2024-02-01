@@ -48,21 +48,7 @@ class _ReminderDetailsSuccessState extends State<ReminderDetailsSuccess> {
         builder: (context, state) {
           return Scaffold(
             backgroundColor: state.reminder.backgroudReminder,
-            appBar: AppbarWidget(
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.tag),
-                  onPressed: () async {
-                    await showDialog(
-                      context: context,
-                      builder: (context) => DialogCategoryWidget(
-                        color: state.reminder.backgroudReminder,
-                      ),
-                    );
-                  },
-                )
-              ],
-            ),
+            appBar: const AppbarWidget(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: SafeArea(

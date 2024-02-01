@@ -26,11 +26,8 @@ class _ReminderGridWidgetState extends State<ReminderGridWidget> {
       crossAxisSpacing: 5,
       mainAxisSpacing: 5,
       children: widget.reminders
-          .map((reminder) => SizedBox(
-                width: double.maxFinite,
-                child: CardReminderWidget(
-                  reminder: reminder,
-                ),
+          .map((reminder) => CardReminderWidget(
+                reminder: reminder,
               ))
           .toList(),
     );
