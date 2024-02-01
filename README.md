@@ -18,6 +18,10 @@ para manter o projeto organizado e o codigo limpo.
 
 **Local-Database:** Sembast
 
+## Screenshots
+
+<img width="220" height="450" src="https://github.com/walex36/reminder_clean_arch/blob/master/assets/img1.png?raw=true"> <img width="220" height="450" src="https://github.com/walex36/reminder_clean_arch/blob/master/assets/img2.png?raw=true"> <img width="220" height="450" src="https://github.com/walex36/reminder_clean_arch/blob/master/assets/img3.png?raw=true"> <img width="220" height="450" src="https://github.com/walex36/reminder_clean_arch/blob/master/assets/img4.png?raw=true"> <img width="220" height="450" src="https://github.com/walex36/reminder_clean_arch/blob/master/assets/img5.png?raw=true">
+
 
 ## Referência
 
